@@ -33,13 +33,9 @@ pipeline {
                     )
 
                     echo Using Maven: %MVN_CMD%
-                    if /I "%MVN_CMD%"=="mvn" (
-                        mvn -B clean package
-                        exit /b %ERRORLEVEL%
-                    ) else (
-                        call "%MVN_CMD%" -B clean package
-                        exit /b %ERRORLEVEL%
-                    )
+                    call "%MVN_CMD%" -B clean package
+                    set "MVN_EXIT=%ERRORLEVEL%"
+                    exit /b %MVN_EXIT%
                 '''
             }
         }
